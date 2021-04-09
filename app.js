@@ -2,7 +2,7 @@ function toUpper(text) {
     const upperCased = text.toUpperCase();
     console.log(upperCased);
   }
-  var myQuestions = [
+  const myQuestions = [
     {
       question: "What is 10/2?",
       answers: {
@@ -23,9 +23,9 @@ function toUpper(text) {
     }
   ];
   
-  var quizContainer = document.getElementById('quiz');
-  var resultsContainer = document.getElementById('results');
-  var submitButton = document.getElementById('submit');
+  const quizContainer = document.getElementById('quiz');
+  const resultsContainer = document.getElementById('results');
+  const submitButton = document.getElementById('submit');
   
   generateQuiz(myQuestions, quizContainer, resultsContainer, submitButton);
   
@@ -33,11 +33,11 @@ function toUpper(text) {
   
     function showQuestions(questions, quizContainer){
       // we'll need a place to store the output and the answer choices
-      var output = [];
-      var answers;
+      const output = [];
+      const answers;
   
       // for each question...
-      for(var i=0; i<questions.length; i++){
+      for(const i=0; i<questions.length; i++){
         
         // first reset the list of answers
         answers = [];
@@ -70,14 +70,14 @@ function toUpper(text) {
     function showResults(questions, quizContainer, resultsContainer){
       
       // gather answer containers from our quiz
-      var answerContainers = quizContainer.querySelectorAll('.answers');
+      const answerContainers = quizContainer.querySelectorAll('.answers');
       
       // keep track of user's answers
-      var userAnswer = '';
-      var numCorrect = 0;
+      const userAnswer = '';
+      const numCorrect = 0;
       
       // for each question...
-      for(var i=0; i<questions.length; i++){
+      for(const i=0; i<questions.length; i++){
   
         // find selected answer
         userAnswer = (answerContainers[i].querySelector('input[name=question'+i+']:checked')||{}).value;
