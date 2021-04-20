@@ -2,7 +2,7 @@
   "name": "quizgame-benjamin-berdichevsky",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
     "start": "parcel src/index.html",
     "build-prod": "parcel build src/index.html"

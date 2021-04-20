@@ -118,148 +118,136 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   return newRequire;
 })({"js/index.js":[function(require,module,exports) {
-function _readOnlyError(name) { throw new TypeError("\"" + name + "\" is read-only"); }
+window.onload = init();
 
-console.log("connected");
+function init() {
+  var quizContainer = document.getElementById('quiz');
+  var resultsContainer = document.getElementById('results');
+  var submitButton = document.getElementById('submit');
 
-function toUpper(text) {
-  var upperCased = text.toUpperCase();
-  console.log(upperCased);
-}
+  function buildQuiz() {
+    // variable to store the HTML output
+    var output = []; // for each question...
 
-var myQuestions = [{
-  question: "Hi There Soccer Fan! This is a quiz for only the most supreme of all Soccer Fans. You must get all the questions correct to win the Ultimate Prize! Are you up for the Challenge?",
-  answers: {
-    a: 'yes',
-    b: 'no'
-  },
-  correctAnswer: 'a'
-}, {
-  question: "Which one of these players doesn't play soccer anymore?",
-  answers: {
-    a: 'Zlatan Ibrahimovic',
-    b: 'Andrés Iniesta',
-    c: 'David Beckham'
-  },
-  correctAnswer: 'c'
-}, {
-  question: "What is the Name of the biggest England Soccer League?",
-  answers: {
-    a: 'EFL Championship',
-    b: 'Premier League',
-    c: 'Champions League'
-  },
-  correctAnswer: 'b'
-}, {
-  question: "Which of these players still plays for Barcelona after over 16 years of playing for the club?",
-  answers: {
-    a: 'Lionel Messi',
-    b: 'Gerard Pique',
-    c: 'Xavier Hernández Creus (Xavi)'
-  },
-  correctAnswer: 'a'
-}, {
-  question: "What Player out of these at some point played for Ireland in major Competitions?",
-  answers: {
-    a: 'Roy Keane',
-    b: 'Didier Drogba',
-    c: 'Jack Grealish'
-  },
-  correctAnswer: 'a'
-}, {
-  question: "Which of these teams won the Champions League the most ammount of times? (13 times!)",
-  answers: {
-    a: 'Liverpool FC',
-    b: 'AC Milan',
-    c: 'Real Madrid'
-  },
-  correctAnswer: 'c'
-}, {
-  question: "Who holds the record for the most Champions League Goals in a single season? (17 goals)",
-  answers: {
-    a: 'Robert Lewandowski',
-    b: 'Lionel Messi',
-    c: 'Cristiano Ronaldo'
-  },
-  correctAnswer: 'c'
-}, {
-  question: "Who holds the record for the most Champions League Goals? (134 goals!)",
-  answers: {
-    a: 'Robert Lewandowski',
-    b: 'Lionel Messi',
-    c: 'Cristiano Ronaldo'
-  },
-  correctAnswer: 'c'
-}, {
-  question: "What is the highest amount of goals anyone has scored in a Calendar Year?",
-  answers: {
-    a: '83',
-    b: '99',
-    c: '91'
-  },
-  correctAnswer: 'c'
-}];
-var quizContainer = document.getElementById('quiz');
-var resultsContainer = document.getElementById('results');
-var submitButton = document.getElementById('submit');
-generateQuiz(myQuestions, quizContainer, resultsContainer, submitButton);
+    myQuestions.forEach(function (currentQuestion, questionNumber) {
+      // variable to store the list of possible answers
+      var answers = []; // and for each available answer...
 
-function generateQuiz(questions, quizContainer, resultsContainer, submitButton) {
-  function showQuestions(questions, quizContainer) {
-    // we'll need a place to store the output and the answer choices
-    var output = [];
-    var answers = []; // for each question...
-
-    for (var i = 0; i < questions.length; _readOnlyError("i"), i++) {
-      // first reset the list of answers
-      answers = (_readOnlyError("answers"), []); // for each available answer...
-
-      for (letter in questions[i].answers) {
-        // ...add an html radio button
-        answers.push('<label>' + '<input type="radio" name="question' + i + '" value="' + letter + '">' + letter + ': ' + questions[i].answers[letter] + '</label>');
+      for (letter in currentQuestion.answers) {
+        // ...add an HTML radio button
+        answers.push("<label>\n              <input type=\"radio\" name=\"question".concat(questionNumber, "\" value=\"").concat(letter, "\">\n              ").concat(letter, " :\n              ").concat(currentQuestion.answers[letter], "\n            </label>"));
       } // add this question and its answers to the output
 
 
-      output.push('<div class="question">' + questions[i].question + '</div>' + '<div class="answers">' + answers.join('') + '</div>');
-    } // finally combine our output list into one string of html and put it on the page
-
+      output.push("<div class=\"question\"> ".concat(currentQuestion.question, " </div>\n          <div class=\"answers\"> ").concat(answers.join(''), " </div>"));
+    }); // finally combine our output list into one string of HTML and put it on the page
 
     quizContainer.innerHTML = output.join('');
   }
 
-  function showResults(questions, quizContainer, resultsContainer) {
+  function showResults() {
     // gather answer containers from our quiz
     var answerContainers = quizContainer.querySelectorAll('.answers'); // keep track of user's answers
 
-    var userAnswer = '';
     var numCorrect = 0; // for each question...
 
-    for (var i = 0; i < questions.length; _readOnlyError("i"), i++) {
+    myQuestions.forEach(function (currentQuestion, questionNumber) {
       // find selected answer
-      userAnswer = (_readOnlyError("userAnswer"), (answerContainers[i].querySelector('input[name=question' + i + ']:checked') || {}).value); // if answer is correct
+      var answerContainer = answerContainers[questionNumber];
+      var selector = "input[name=question".concat(questionNumber, "]:checked");
+      var userAnswer = (answerContainer.querySelector(selector) || {}).value; // if answer is correct
 
-      if (userAnswer === questions[i].correctAnswer) {
+      if (userAnswer === currentQuestion.correctAnswer) {
         // add to the number of correct answers
-        _readOnlyError("numCorrect"), numCorrect++; // color the answers green
+        numCorrect++; // color the answers green
 
-        answerContainers[i].style.color = 'lightgreen';
+        answerContainers[questionNumber].style.color = 'lightgreen';
       } // if answer is wrong or blank
       else {
           // color the answers red
-          answerContainers[i].style.color = 'red';
+          answerContainers[questionNumber].style.color = 'red';
         }
-    } // show number of correct answers out of total
+    }); // show number of correct answers out of total
 
+    resultsContainer.innerHTML = "".concat(numCorrect, " out of ").concat(myQuestions.length);
+  }
 
-    resultsContainer.innerHTML = numCorrect + ' out of ' + questions.length;
-  } // show questions right away
+  var myQuestions = [{
+    question: "Hi There Soccer Fan! This is a quiz for only the most supreme of all Soccer Fans. You must get all the questions correct to win the Ultimate Prize! Are you up for the Challenge?",
+    answers: {
+      a: 'yes',
+      b: 'no'
+    },
+    correctAnswer: 'a'
+  }, {
+    question: "Which one of these players doesn't play soccer anymore?",
+    answers: {
+      a: 'Zlatan Ibrahimovic',
+      b: 'Andrés Iniesta',
+      c: 'David Beckham'
+    },
+    correctAnswer: 'c'
+  }, {
+    question: "What is the Name of the biggest England Soccer League?",
+    answers: {
+      a: 'EFL Championship',
+      b: 'Premier League',
+      c: 'Champions League'
+    },
+    correctAnswer: 'b'
+  }, {
+    question: "Which of these players still plays for Barcelona after over 16 years of playing for the club?",
+    answers: {
+      a: 'Lionel Messi',
+      b: 'Gerard Pique',
+      c: 'Xavier Hernández Creus (Xavi)'
+    },
+    correctAnswer: 'a'
+  }, {
+    question: "What Player out of these at some point played for Ireland in major Competitions?",
+    answers: {
+      a: 'Roy Keane',
+      b: 'Didier Drogba',
+      c: 'Jack Grealish'
+    },
+    correctAnswer: 'a'
+  }, {
+    question: "Which of these teams won the Champions League the most ammount of times? (13 times!)",
+    answers: {
+      a: 'Liverpool FC',
+      b: 'AC Milan',
+      c: 'Real Madrid'
+    },
+    correctAnswer: 'c'
+  }, {
+    question: "Who holds the record for the most Champions League Goals in a single season? (17 goals)",
+    answers: {
+      a: 'Robert Lewandowski',
+      b: 'Lionel Messi',
+      c: 'Cristiano Ronaldo'
+    },
+    correctAnswer: 'c'
+  }, {
+    question: "Who holds the record for the most Champions League Goals? (134 goals!)",
+    answers: {
+      a: 'Robert Lewandowski',
+      b: 'Lionel Messi',
+      c: 'Cristiano Ronaldo'
+    },
+    correctAnswer: 'c'
+  }, {
+    question: "What is the highest amount of goals anyone has scored in a Calendar Year?",
+    answers: {
+      a: '83',
+      b: '99',
+      c: '91'
+    },
+    correctAnswer: 'c'
+  }]; // Kick things off
 
+  buildQuiz(); // Event listeners
 
-  showQuestions(questions, quizContainer); // on submit, show results
-
-  submitButton.onclick = function () {
-    showResults(questions, quizContainer, resultsContainer);
-  };
+  submitButton.addEventListener('click', showResults);
 }
 },{}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
@@ -289,7 +277,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58756" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58942" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

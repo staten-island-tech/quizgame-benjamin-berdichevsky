@@ -146,7 +146,7 @@ function toUpper(text) {
         userAnswer = (answerContainers[i].querySelector('input[name=question'+i+']:checked')||{}).value;
         
         // if answer is correct
-        if(userAnswer===questions[i].correctAnswer){
+        if(userAnswer==questions[i].correctAnswer){
           // add to the number of correct answers
           numCorrect++;
           
