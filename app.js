@@ -19,16 +19,16 @@ function toUpper(text) {
         c: 'David Beckham'
       },
       correctAnswer: 'c'
-    }
+    },
     {
       question: "What is the Name of the biggest England Soccer League?",
       answers: {
-        a: 'EFL Championship'
+        a: 'EFL Championship',
         b: 'Premier League',
         c: 'Champions League'
       },
       correctAnswer: 'b'
-    }
+    },
     {
       question: "Which of these players still plays for Barcelona after over 16 years of playing for the club?",
       answers: {
@@ -37,7 +37,7 @@ function toUpper(text) {
         c: 'Xavier Hernández Creus (Xavi)'
       },
       correctAnswer: 'a'
-    }
+    },
     {
       question: "What Player out of these at some point played for Ireland in major Competitions?",
       answers: {
@@ -46,7 +46,7 @@ function toUpper(text) {
         c: 'Jack Grealish'
       },
       correctAnswer: 'a'
-    }
+    },
     {
       question: "Which of these teams won the Champions League the most ammount of times? (13 times!)",
       answers: {
@@ -55,7 +55,7 @@ function toUpper(text) {
         c: 'Real Madrid'
       },
       correctAnswer: 'c'
-    }
+    },
     {
       question: "Who holds the record for the most Champions League Goals in a single season? (17 goals)",
       answers: {
@@ -64,7 +64,7 @@ function toUpper(text) {
         c: 'Cristiano Ronaldo'
       },
       correctAnswer: 'c'
-    }
+    },
     {
       question: "Who holds the record for the most Champions League Goals? (134 goals!)",
       answers: {
@@ -73,7 +73,7 @@ function toUpper(text) {
         c: 'Cristiano Ronaldo'
       },
       correctAnswer: 'c'
-    }
+    },
     {
       question: "What is the highest amount of goals anyone has scored in a Calendar Year?",
       answers: {
